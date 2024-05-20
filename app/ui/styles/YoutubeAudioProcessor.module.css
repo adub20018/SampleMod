@@ -1,0 +1,28 @@
+/* youtube link input */
+.input {
+  padding: 18px;
+  width: 40vw;
+  height: 4rem;
+  font-size: 18px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px 0 0 5px;
+}
+.input:focus {
+  outline: none;
+}
+
+/* youtube input submit btn */
+.submitBtn {
+  background-color: #865cac;
+  height: 4rem;
+  width: 10rem;
+  font-size: 18px;
+  border: 1px solid black;
+  border-left: none;
+  border-radius: 0 5px 5px 0px;
+  color: white;
+}
+.submitBtn:hover {
+  cursor: pointer;
+}
