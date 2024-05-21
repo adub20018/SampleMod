@@ -3,6 +3,7 @@
 import { useState } from "react";
 import AudioVisualiser from "./AudioVisualiser";
 import styles from "./styles/YoutubeAudioProcessor.module.css";
+import Waveform from "./Waveform";
 
 const YoutubeAudioProcessor = () => {
   const [url, setUrl] = useState("");
@@ -47,12 +48,7 @@ const YoutubeAudioProcessor = () => {
         </form>
       )}
 
-      {audioUrl && (
-        // displays AudioVisualiser component if audio extraction was successful
-        <div>
-          <AudioVisualiser audioFile={audioUrl} />
-        </div>
-      )}
+      {audioUrl && <Waveform audioFile={audioUrl} />}
     </div>
   );
 };

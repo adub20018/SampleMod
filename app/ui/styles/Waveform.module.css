@@ -1,0 +1,66 @@
+.waveformContainer {
+  background-color: #2d283e;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5rem;
+  width: 80vw;
+}
+
+.waveform {
+  border: 2px solid black;
+  background-color: rgb(71, 62, 100);
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.playControlsContainer {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* play, skip controls */
+.playControl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  font-size: 30px;
+  border: none;
+  margin: 10px;
+  /* background-color: #d1d7e0dc; */
+  background-color: transparent;
+  transition: ease-in-out 0.1s;
+  color: #d1d7e0cb;
+}
+
+.playControl:hover {
+  color: white;
+}
+
+.playControl:focus {
+}
+
+#playPauseBtn {
+  background-color: #d1d7e0;
+  color: black;
+  transition: ease-in-out 0.1s;
+}
+
+#playPauseBtn:hover {
+  background-color: white;
+}
+
+/* region / utility controls */
+.controls {
+  padding: 1rem;
+  background-color: #d1d7e0;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}

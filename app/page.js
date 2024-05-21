@@ -5,8 +5,8 @@ import YoutubeAudioProcessor from "./ui/YoutubeAudioProcessor";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>SampleMod</h1>
       <div className={styles.container}>
+        <h1 className={styles.title}>SampleMod</h1>
         <YoutubeAudioProcessor />
       </div>
     </main>

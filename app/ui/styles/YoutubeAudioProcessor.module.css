@@ -4,7 +4,7 @@
   width: 40vw;
   height: 4rem;
   font-size: 18px;
-  background-color: white;
+  background-color: #ffffff;
   border: 1px solid black;
   border-radius: 5px 0 0 5px;
 }
@@ -14,7 +14,7 @@
 
 /* youtube input submit btn */
 .submitBtn {
-  background-color: #865cac;
+  background-color: #802bb1;
   height: 4rem;
   width: 10rem;
   font-size: 18px;
@@ -22,7 +22,9 @@
   border-left: none;
   border-radius: 0 5px 5px 0px;
   color: white;
+  transition: ease-in-out 0.1s;
 }
 .submitBtn:hover {
   cursor: pointer;
+  background-color: #802bb1d0;
 }
