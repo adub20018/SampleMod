@@ -14,7 +14,6 @@ import styles from "./styles/Waveform.module.css";
 import {
   BsFillSkipBackwardFill,
   BsFillSkipForwardFill,
-  BsFillStopFill,
   BsFillPlayFill,
   BsFillPauseFill,
 } from "react-icons/bs";

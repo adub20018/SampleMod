@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import AudioVisualiser from "./AudioVisualiser";
 import styles from "./styles/YoutubeAudioProcessor.module.css";
 // import Waveform from "./Waveform";
 import dynamic from "next/dynamic";
@@ -53,7 +52,10 @@ const YoutubeAudioProcessor = () => {
         </form>
       )}
 
-      {audioUrl && <Waveform audioFile={audioUrl} />}
+      {
+        // display waveform if audio conversion was successful
+        audioUrl && <Waveform audioFile={audioUrl} />
+      }
     </div>
   );
 };
