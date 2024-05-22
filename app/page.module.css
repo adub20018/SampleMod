@@ -9,9 +9,14 @@
 }
 
 .title {
-  font-size: 56px;
+  font-size: 28px;
   margin-bottom: 5rem;
-  /* color: #802bb1; */
+  color: black;
+}
+
+.logo {
+  height: 4rem;
+  width: auto;
 }
 
 .container {
@@ -22,8 +27,14 @@
   justify-content: space-evenly;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .title {
-    font-size: 45px;
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .title {
+    font-size: 22px;
   }
 }

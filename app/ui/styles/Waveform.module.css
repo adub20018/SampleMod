@@ -73,6 +73,7 @@
   border: 1px solid black;
   border-radius: 5px;
   transition: ease-in-out 0.2s;
+  color: #d1d7e0;
 }
 .controls:hover {
   background-color: rgb(116, 105, 156);
