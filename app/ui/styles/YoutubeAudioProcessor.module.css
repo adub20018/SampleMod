@@ -93,6 +93,9 @@
     display: flex;
     flex-direction: column;
   }
+  .inputInstructions {
+    width: 70vw;
+  }
   .input,
   .submitBtn {
     width: 70vw;

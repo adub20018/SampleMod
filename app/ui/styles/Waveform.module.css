@@ -1,8 +1,17 @@
+.playerContainer {
+}
+
+.instructions {
+  font-size: 20px;
+  color: #d1d7e0;
+  margin-bottom: 2rem;
+}
+
 .waveformContainer {
   background-color: #2d283e;
   border: 2px solid black;
   border-radius: 5px;
-  padding: 5rem;
+  padding: 2rem;
   width: 80vw;
 }
 
@@ -59,8 +68,25 @@
 /* region / utility controls */
 .controls {
   padding: 1rem;
-  background-color: #d1d7e0;
+  background-color: rgb(95, 84, 133);
   margin: 10px;
   border: 1px solid black;
   border-radius: 5px;
+  transition: ease-in-out 0.2s;
+}
+.controls:hover {
+  background-color: rgb(116, 105, 156);
+  box-shadow: 3px 5px 15px 1px rgb(95, 84, 133);
+}
+
+@media screen and (max-width: 600px) {
+  .waveformContainer {
+    width: 95vw;
+    padding: 10px;
+  }
+  .waveform {
+    width: 90vw;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }

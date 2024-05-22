@@ -312,81 +312,87 @@ export default function Waveform({ audioFile }) {
   };
 
   return (
-    <div className={styles.waveformContainer}>
-      <div className={styles.waveform}>
-        <WaveSurfer plugins={plugins} onMount={handleWSMount}>
-          <WaveForm
-            // waveform parameters
-            id="waveform"
-            cursorColor="transparent"
-            waveColor="#D1d7e0"
-            progressColor="#802bb1"
-            barWidth={1}
-          >
-            {regions.map((regionProps) => (
-              <Region
-                onUpdateEnd={handleRegionUpdate}
-                key={regionProps.id}
-                {...regionProps}
-              />
-            ))}
-            {markers.map((marker, index) => {
-              return (
-                <Marker // displays markers
-                  key={index}
-                  {...marker}
-                  onClick={(...args) => {
-                    console.log("onClick", ...args);
-                  }}
-                  onDrag={(...args) => {
-                    console.log("onDrag", ...args);
-                  }}
-                  onDrop={(...args) => {
-                    console.log("onDrop", ...args);
-                  }}
+    <div className={styles.playerContainer}>
+      <div className={styles.waveformContainer}>
+        <p className={styles.instructions}>
+          Click and drag on the waveform to create a section to loop over
+          <br />
+        </p>
+        <div className={styles.waveform}>
+          <WaveSurfer plugins={plugins} onMount={handleWSMount}>
+            <WaveForm
+              // waveform parameters
+              id="waveform"
+              cursorColor="transparent"
+              waveColor="#D1d7e0"
+              progressColor="#802bb1"
+              barWidth={1}
+            >
+              {regions.map((regionProps) => (
+                <Region
+                  onUpdateEnd={handleRegionUpdate}
+                  key={regionProps.id}
+                  {...regionProps}
                 />
-              );
-            })}
-          </WaveForm>
-          <div id="timeline" />
-        </WaveSurfer>
+              ))}
+              {markers.map((marker, index) => {
+                return (
+                  <Marker // displays markers
+                    key={index}
+                    {...marker}
+                    onClick={(...args) => {
+                      console.log("onClick", ...args);
+                    }}
+                    onDrag={(...args) => {
+                      console.log("onDrag", ...args);
+                    }}
+                    onDrop={(...args) => {
+                      console.log("onDrop", ...args);
+                    }}
+                  />
+                );
+              })}
+            </WaveForm>
+            <div id="timeline" />
+          </WaveSurfer>
+        </div>
+        {/* displays play audio controls */}
+        <div className={styles.playControlsContainer}>
+          <button className={styles.playControl} onClick={skipBack}>
+            <BsFillSkipBackwardFill />
+          </button>
+          <button
+            className={styles.playControl}
+            id={styles.playPauseBtn}
+            onClick={playPause}
+            // play/pause on space
+            onKeyDown={(e) => {
+              if (e.key == "Space") playPause;
+            }}
+          >
+            {
+              isPlaying ? <BsFillPauseFill /> : <BsFillPlayFill /> // displays play/pause button respectively
+            }
+          </button>
+          <button className={styles.playControl} onClick={skipForward}>
+            <BsFillSkipForwardFill />
+          </button>
+        </div>
+        <button className={styles.controls} onClick={generateRegion}>
+          Generate region
+        </button>
+        {/* <button onClick={generateMarker}>Generate Marker</button> */}
+        <button className={styles.controls} onClick={removeLastRegion}>
+          Remove Last Region
+        </button>
+        {/* <button onClick={removeLastMarker}>Remove last marker</button> */}
+        <button className={styles.controls} onClick={toggleTimeline}>
+          Toggle Timeline
+        </button>
+        <button className={styles.controls} onClick={setZoom50}>
+          Toggle Zoom
+        </button>
       </div>
-      {/* displays play audio controls */}
-      <div className={styles.playControlsContainer}>
-        <button className={styles.playControl} onClick={skipBack}>
-          <BsFillSkipBackwardFill />
-        </button>
-        <button
-          className={styles.playControl}
-          id={styles.playPauseBtn}
-          onClick={playPause}
-          // play/pause on space
-          onKeyDown={(e) => {
-            if (e.key == "Space") playPause;
-          }}
-        >
-          {
-            isPlaying ? <BsFillPauseFill /> : <BsFillPlayFill /> // displays play/pause button respectively
-          }
-        </button>
-        <button className={styles.playControl} onClick={skipForward}>
-          <BsFillSkipForwardFill />
-        </button>
-      </div>
-      <button className={styles.controls} onClick={generateRegion}>
-        Generate region
-      </button>
-      {/* <button onClick={generateMarker}>Generate Marker</button> */}
-      <button className={styles.controls} onClick={removeLastRegion}>
-        Remove Last Region
-      </button>
-      {/* <button onClick={removeLastMarker}>Remove last marker</button> */}
-      <button className={styles.controls} onClick={toggleTimeline}>
-        Toggle Timeline
-      </button>
-      <button className={styles.controls} onClick={setZoom50}>
-        Toggle Zoom
-      </button>
     </div>
   );
 }
