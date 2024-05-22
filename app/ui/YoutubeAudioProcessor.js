@@ -3,7 +3,12 @@
 import { useState } from "react";
 import AudioVisualiser from "./AudioVisualiser";
 import styles from "./styles/YoutubeAudioProcessor.module.css";
-import Waveform from "./Waveform";
+// import Waveform from "./Waveform";
+import dynamic from "next/dynamic";
+
+const Waveform = dynamic(() => import("./Waveform"), {
+  ssr: false,
+});
 
 const YoutubeAudioProcessor = () => {
   const [url, setUrl] = useState("");

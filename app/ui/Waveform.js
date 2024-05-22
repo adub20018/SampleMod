@@ -5,6 +5,7 @@ import React, {
   useState,
   useMemo,
 } from "react";
+
 import { WaveSurfer, WaveForm, Region, Marker } from "wavesurfer-react";
 import RegionsPlugin from "wavesurfer.js/dist/plugin/wavesurfer.regions.min";
 import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline.min";
@@ -124,10 +125,20 @@ export default function Waveform({ audioFile }) {
         playPause();
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    // REPLACED BY BELOW CODE IN ATTEMPT TO FIX BUILD ERRORS:
+    // window.addEventListener("keydown", handleKeyDown);
+    // return () => {
+    //   window.removeEventListener("keydown", handleKeyDown);
+    // };
+    // Only add event listener on the client side
+    if (typeof window !== "undefined") {
+      window.addEventListener("keydown", handleKeyDown);
+
+      // Cleanup event listener on unmount
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
   }, [isPlaying]);
 
   // region creation code
@@ -192,7 +203,11 @@ export default function Waveform({ audioFile }) {
           setIsPlaying(false);
         });
 
-        if (window) {
+        // if (window) {
+        //   window.surferidze = wavesurferRef.current;
+        // }
+        // only run this code on the client side
+        if (typeof window !== "undefined") {
           window.surferidze = wavesurferRef.current;
         }
       }
