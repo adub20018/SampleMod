@@ -2,15 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem;
+  padding: 3.5rem;
   min-height: 100vh;
   text-align: center;
   background-color: #d1d7e0;
 }
 
 .title {
-  font-size: 48px;
+  font-size: 56px;
   margin-bottom: 5rem;
+  /* color: #802bb1; */
 }
 
 .container {
@@ -19,4 +20,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+@media screen and (max-width: 350px) {
+  .title {
+    font-size: 40px;
+  }
 }
