@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <Image className={styles.logo} src={logo} alt="SampleMod Logo" />
         <a className={styles.title} href={"/"}>
+          <Image className={styles.logo} src={logo} alt="SampleMod Logo" />
           <h1>SampleMod</h1>
         </a>
         <YoutubeAudioProcessor />

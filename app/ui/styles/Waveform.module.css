@@ -1,6 +1,27 @@
 .playerContainer {
 }
 
+.backButtonContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.backButton {
+  font-size: 20px;
+  margin-left: 5px;
+  text-decoration: none;
+  color: #802bb1;
+  width: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backButton:hover {
+  color: #802bb1d0;
+}
+
 .instructions {
   font-size: 20px;
   color: #d1d7e0;

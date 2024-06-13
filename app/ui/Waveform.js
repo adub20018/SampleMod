@@ -16,6 +16,7 @@ import {
   BsFillSkipForwardFill,
   BsFillPlayFill,
   BsFillPauseFill,
+  BsArrowLeft,
 } from "react-icons/bs";
 // import { generateNum, generateTwoNumsWithDistance } from "../lib/generateNums"; // route to lib function
 
@@ -51,34 +52,6 @@ export default function Waveform({ audioFile }) {
     //   position: "top",
     // },
   ]);
-
-  // memorise plugins (to avoid re-rendering)
-  const plugins = useMemo(() => {
-    return [
-      {
-        plugin: RegionsPlugin,
-        options: { dragSelection: true }, // enable drag selection for region
-      },
-      timelineVis && {
-        plugin: TimelinePlugin,
-        options: {
-          container: "#timeline", // container for timeline
-        },
-      },
-      {
-        plugin: MarkersPlugin,
-        options: {
-          markers: [{ draggable: true }], // enable draggable markers
-        },
-      },
-    ].filter(Boolean); // remove falsy values from array
-  }, [timelineVis]);
-
-  // toggle visibility of timeline
-  const toggleTimeline = useCallback(() => {
-    setTimelineVis(!timelineVis);
-  }, [timelineVis]);
-
   const [regions, setRegions] = useState([
     // ------- Dummy Region Initial States --------
     // {
@@ -109,6 +82,36 @@ export default function Waveform({ audioFile }) {
     //   },
     // },
   ]);
+  const [currentRegion, setCurrentRegion] = useState(null);
+
+  const wavesurferRef = useRef();
+
+  // memorise plugins (to avoid re-rendering)
+  const plugins = useMemo(() => {
+    return [
+      {
+        plugin: RegionsPlugin,
+        options: { dragSelection: true }, // enable drag selection for region
+      },
+      timelineVis && {
+        plugin: TimelinePlugin,
+        options: {
+          container: "#timeline", // container for timeline
+        },
+      },
+      {
+        plugin: MarkersPlugin,
+        options: {
+          markers: [{ draggable: true }], // enable draggable markers
+        },
+      },
+    ].filter(Boolean); // remove falsy values from array
+  }, [timelineVis]);
+
+  // toggle visibility of timeline
+  const toggleTimeline = useCallback(() => {
+    setTimelineVis(!timelineVis);
+  }, [timelineVis]);
 
   // use regions ref always have latest regions
   const regionsRef = useRef(regions);
@@ -148,6 +151,8 @@ export default function Waveform({ audioFile }) {
       // ignore regions with a systemRegionId
       if (region.data.systemRegionId) return;
 
+      setCurrentRegion(region);
+
       // update regions state
       setRegions([
         ...regionsRef.current,
@@ -157,7 +162,28 @@ export default function Waveform({ audioFile }) {
     [regionsRef]
   );
 
-  const wavesurferRef = useRef();
+  // Manually handle loop
+  useEffect(() => {
+    const handleLoop = () => {
+      if (currentRegion) {
+        const { start, end } = currentRegion;
+
+        const currentTime = wavesurferRef.current.getCurrentTime();
+
+        if (currentTime >= end) {
+          wavesurferRef.current.play(start);
+        }
+      }
+    };
+
+    if (wavesurferRef.current) {
+      wavesurferRef.current.on("audioprocess", handleLoop);
+
+      return () => {
+        wavesurferRef.current.un("audioprocess", handleLoop);
+      };
+    }
+  }, [currentRegion]);
 
   const handleWSMount = useCallback(
     (waveSurfer) => {
@@ -310,6 +336,11 @@ export default function Waveform({ audioFile }) {
 
   return (
     <div className={styles.playerContainer}>
+      <div className={styles.backButtonContainer}>
+        <a className={styles.backButton} href="/">
+          <BsArrowLeft /> Back
+        </a>
+      </div>
       <div className={styles.waveformContainer}>
         <p className={styles.instructions}>
           Click and drag on the waveform to create a section to loop over
