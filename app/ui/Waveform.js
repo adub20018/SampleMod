@@ -18,22 +18,7 @@ import {
   BsFillPauseFill,
   BsArrowLeft,
 } from "react-icons/bs";
-// import { generateNum, generateTwoNumsWithDistance } from "../lib/generateNums"; // route to lib function
-
-// helper function for generate nums
-function generateNum(min, max) {
-  return Math.random() * (max - min + 1) + min;
-}
-
-// get numbers for region/marker generation
-function generateTwoNumsWithDistance(distance, min, max) {
-  const num1 = generateNum(min, max);
-  const num2 = generateNum(min, max);
-  if (num2 - num1 >= 10) {
-    return [num1, num2];
-  }
-  return generateTwoNumsWithDistance(distance, min, max);
-}
+import { generateNum, generateTwoNumsWithDistance } from "../lib/generateNums"; // route to lib function
 
 export default function Waveform({ audioFile }) {
   const [timelineVis, setTimelineVis] = useState(true);
@@ -127,11 +112,7 @@ export default function Waveform({ audioFile }) {
         playPause();
       }
     };
-    // REPLACED BY BELOW CODE IN ATTEMPT TO FIX BUILD ERRORS:
-    // window.addEventListener("keydown", handleKeyDown);
-    // return () => {
-    //   window.removeEventListener("keydown", handleKeyDown);
-    // };
+
     // Only add event listener on the client side
     if (typeof window !== "undefined") {
       window.addEventListener("keydown", handleKeyDown);
@@ -151,7 +132,7 @@ export default function Waveform({ audioFile }) {
       // ignore regions with a systemRegionId
       if (region.data.systemRegionId) return;
 
-      setCurrentRegion(region);
+      setCurrentRegion(region); //
 
       // update regions state
       setRegions([
@@ -162,14 +143,14 @@ export default function Waveform({ audioFile }) {
     [regionsRef]
   );
 
-  // Manually handle loop
+  // Manually handle region loop
   useEffect(() => {
     const handleLoop = () => {
       if (currentRegion) {
         const { start, end } = currentRegion;
-
         const currentTime = wavesurferRef.current.getCurrentTime();
 
+        // if end of region, loop back to start of region
         if (currentTime >= end) {
           wavesurferRef.current.play(start);
         }
@@ -225,9 +206,6 @@ export default function Waveform({ audioFile }) {
           setIsPlaying(false);
         });
 
-        // if (window) {
-        //   window.surferidze = wavesurferRef.current;
-        // }
         // only run this code on the client side
         if (typeof window !== "undefined") {
           window.surferidze = wavesurferRef.current;

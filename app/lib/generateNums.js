@@ -1,10 +1,10 @@
 // generate number parameters
-function generateNum(min, max) {
+export function generateNum(min, max) {
   return Math.random() * (max - min + 1) + min;
 }
 
 // get distance and numbers for region/marker generation
-function generateTwoNumsWithDistance(distance, min, max) {
+export function generateTwoNumsWithDistance(distance, min, max) {
   const num1 = generateNum(min, max);
   const num2 = generateNum(min, max);
   if (num2 - num1 >= 10) {
