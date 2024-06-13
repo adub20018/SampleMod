@@ -270,10 +270,18 @@ export default function Waveform({ audioFile }) {
 
   // remove the last created region
   const removeLastRegion = useCallback(() => {
-    let nextRegions = [...regions];
-    nextRegions.pop();
-    setRegions(nextRegions);
-  }, [regions]);
+    setRegions((prevRegions) => {
+      const updatedRegions = [...prevRegions];
+      const removedRegion = updatedRegions.pop();
+
+      // If the removed region is the current looping region, clear currentRegion
+      if (currentRegion && currentRegion.id === removedRegion.id) {
+        setCurrentRegion(null);
+      }
+
+      return updatedRegions;
+    });
+  }, [currentRegion]);
 
   // remove the last created marker
   const removeLastMarker = useCallback(() => {
