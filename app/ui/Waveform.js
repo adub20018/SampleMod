@@ -148,9 +148,6 @@ export default function Waveform({ audioFile }) {
       // ignore regions with a systemRegionId
       if (region.data.systemRegionId) return;
 
-      // play and loop audio inside region
-      region.playLoop();
-
       // update regions state
       setRegions([
         ...regionsRef.current,
