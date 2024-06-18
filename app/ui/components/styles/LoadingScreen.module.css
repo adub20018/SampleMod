@@ -1,0 +1,32 @@
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 20vh;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px; /* Adjust height as needed */
+  margin-top: 2rem;
+}
+
+.spinner {
+  width: 3rem; /* Adjust size of spinner */
+  height: 3rem; /* Adjust size of spinner */
+  border: 8px solid #802bb1;
+  border-radius: 50%;
+  border-left-color: transparent;
+  animation: spin 2s infinite linear; /* Animation properties */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
